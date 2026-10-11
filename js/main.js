@@ -62,9 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function getPreferredTheme() {
     try {
       var savedTheme = localStorage.getItem('yrc_theme');
-      if (savedTheme) return savedTheme;
+      if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
     } catch (e) {}
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // الوضع الافتراضي دائماً نهاري (Light Mode) حتى لو كان متصفح المستخدم على الوضع الداكن
+    return 'light';
   }
 
   function applyTheme(theme) {

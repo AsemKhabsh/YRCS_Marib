@@ -125,30 +125,6 @@
   --shadow-glow: 0 12px 30px rgba(217, 0, 18, 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg-page: #0E1013;
-    --bg-surface: #14171C;
-    --bg-surface-hover: #1C2027;
-    --bg-card: #181B21;
-    --bg-card-elevated: #1F232B;
-    --bg-nav: rgba(14, 16, 19, 0.88);
-    --bg-dialog-overlay: rgba(0, 0, 0, 0.92);
-
-    --text-main: #F3F4F6;
-    --text-muted: #9CA3AF;
-    --text-light: #6B7280;
-
-    --border-light: #262A33;
-    --border-subtle: #1E2128;
-    --border-card: #2B303B;
-
-    --dark-section-bg: #0A0B0E;
-    --dark-section-card: rgba(255, 255, 255, 0.04);
-    --dark-section-border: rgba(255, 255, 255, 0.08);
-  }
-}
-
 /* --------------------------------------------------------------------------
    3. الضبط الأساسي وقواعد اللغات (Base, Reset & i18n Rules)
    -------------------------------------------------------------------------- */
