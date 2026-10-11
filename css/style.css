@@ -1,0 +1,2108 @@
+/* ==========================================================================
+   جمعية الهلال الأحمر اليمني — فرع مأرب
+   Yemen Red Crescent Society — Marib Branch
+   Design System & Master Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. الخطوط المحلية (Local Typography)
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Alexandria';
+  src: url('../fonts/Alexandria-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('../fonts/IBMPlexSansArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('../fonts/IBMPlexSansArabic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('../fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans Arabic';
+  src: url('../fonts/IBMPlexSansArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   2. رموز التصميم ومتغيرات الألوان (Design Tokens & Color Palette)
+   -------------------------------------------------------------------------- */
+:root {
+  /* ألوان الهوية الإنسانية للهلال الأحمر */
+  --rc-red: #D90012;
+  --rc-red-hover: #B5000F;
+  --rc-red-subtle: rgba(217, 0, 18, 0.08);
+  --rc-red-glow: rgba(217, 0, 18, 0.22);
+  --rc-red-light: #FF4D5E;
+
+  /* النمط الفاتح (Light Mode) */
+  --bg-page: #FFFFFF;
+  --bg-surface: #F8F9FB;
+  --bg-surface-hover: #F0F2F6;
+  --bg-card: #FFFFFF;
+  --bg-card-elevated: #FFFFFF;
+  --bg-nav: rgba(255, 255, 255, 0.88);
+  --bg-dialog-overlay: rgba(15, 17, 23, 0.82);
+
+  --text-main: #1D2026;
+  --text-muted: #535862;
+  --text-light: #7E8592;
+  --text-inverse: #FFFFFF;
+
+  --border-light: #E5E7EB;
+  --border-subtle: #F0F2F5;
+  --border-card: #E8EAEE;
+
+  /* هيرو وقسم المشن الداكن الراقي (Charcoal Slate بدلاً من الكحلي التجاري) */
+  --dark-section-bg: #15171C;
+  --dark-section-card: rgba(255, 255, 255, 0.06);
+  --dark-section-border: rgba(255, 255, 255, 0.12);
+
+  /* حواف وظلال موحدة */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.09);
+  --shadow-glow: 0 12px 30px rgba(217, 0, 18, 0.25);
+
+  /* منحنى حركة فيزيائي فائق النعومة */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* زخرفة الهوية الرسمية (Official Brand Identity Emblem) */
+  --h-chevron: url("../images/identity-h.png");
+}
+
+/* النمط الداكن (Dark Mode) */
+[data-theme="dark"] {
+  --bg-page: #0E1013;
+  --bg-surface: #14171C;
+  --bg-surface-hover: #1C2027;
+  --bg-card: #181B21;
+  --bg-card-elevated: #1F232B;
+  --bg-nav: rgba(14, 16, 19, 0.88);
+  --bg-dialog-overlay: rgba(0, 0, 0, 0.92);
+
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-light: #6B7280;
+
+  --border-light: #262A33;
+  --border-subtle: #1E2128;
+  --border-card: #2B303B;
+
+  --dark-section-bg: #0A0B0E;
+  --dark-section-card: rgba(255, 255, 255, 0.04);
+  --dark-section-border: rgba(255, 255, 255, 0.08);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 12px 30px rgba(217, 0, 18, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page: #0E1013;
+    --bg-surface: #14171C;
+    --bg-surface-hover: #1C2027;
+    --bg-card: #181B21;
+    --bg-card-elevated: #1F232B;
+    --bg-nav: rgba(14, 16, 19, 0.88);
+    --bg-dialog-overlay: rgba(0, 0, 0, 0.92);
+
+    --text-main: #F3F4F6;
+    --text-muted: #9CA3AF;
+    --text-light: #6B7280;
+
+    --border-light: #262A33;
+    --border-subtle: #1E2128;
+    --border-card: #2B303B;
+
+    --dark-section-bg: #0A0B0E;
+    --dark-section-card: rgba(255, 255, 255, 0.04);
+    --dark-section-border: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. الضبط الأساسي وقواعد اللغات (Base, Reset & i18n Rules)
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  overflow-x: hidden;
+  transition: background-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
+}
+
+/* دعم التبديل القياسي للغتين العربية والإنجليزية */
+html[lang="ar"] [lang="en"],
+html[lang="ar"] en,
+html[lang="en"] [lang="ar"],
+html[lang="en"] ar {
+  display: none !important;
+}
+
+h1, h2, h3, h4, .stat-number {
+  font-family: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s var(--ease-smooth);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--rc-red);
+  outline-offset: 3px;
+}
+
+/* تخطي إلى المحتوى (Skip Link) للوصولية */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  inset-inline-start: 16px;
+  background: var(--rc-red);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  z-index: 9999;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  transition: top 0.25s var(--ease-smooth);
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* شريط تقدم التصفح العلوي */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, var(--rc-red), var(--rc-red-light));
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.08s linear;
+}
+
+/* --------------------------------------------------------------------------
+   4. الحاويات وتنسيقات الأقسام (Layout & Containers)
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: clamp(64px, 8vw, 108px) 0;
+  position: relative;
+}
+
+.section-alt {
+  background-color: var(--bg-surface);
+}
+
+.section-dark {
+  background-color: var(--dark-section-bg);
+  color: var(--text-inverse);
+}
+.section-dark h2,
+.section-dark h3 {
+  color: #FFFFFF;
+}
+.section-dark p {
+  color: #E2E8F0;
+}
+.section-dark .section-subtitle,
+.section-dark .section-header .section-subtitle {
+  color: #E2E8F0 !important;
+  opacity: 0.95;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 6vw, 64px);
+}
+
+.section-header h2 {
+  font-size: clamp(1.8rem, 4vw, 2.45rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.section-header .section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.section-header::after {
+  content: "";
+  display: block;
+  width: min(320px, 88vw);
+  height: 32px;
+  margin: 20px auto 0;
+  background: var(--h-chevron) no-repeat center / contain;
+  opacity: 0.98;
+}
+
+/* الشبكات العامة */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   5. شريط التنقل العلوي الفاخر (Navbar)
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 900;
+  background: var(--bg-nav);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+  padding: 0 24px;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo-img {
+  height: 48px;
+  width: auto;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+}
+
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-brand-title {
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.nav-brand-subtitle {
+  font-size: 0.78rem;
+  color: var(--rc-red);
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.nav-link:hover {
+  color: var(--rc-red);
+  background: var(--rc-red-subtle);
+}
+
+.nav-link.active {
+  color: var(--rc-red);
+  background: var(--rc-red-subtle);
+  font-weight: 700;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.btn-icon:hover {
+  border-color: var(--rc-red);
+  color: var(--rc-red);
+  transform: translateY(-2px);
+}
+
+.btn-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.btn-lang:hover {
+  border-color: var(--rc-red);
+  color: var(--rc-red);
+  background: var(--rc-red-subtle);
+}
+
+.btn-lang .lang-mobile {
+  display: none;
+}
+
+.btn-lang .lang-desktop {
+  display: inline;
+}
+
+.nav-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-main);
+}
+
+/* شاشة الهاتف - Drawer القائمة الجوالة */
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 850;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-smooth);
+}
+
+.mobile-nav-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --------------------------------------------------------------------------
+   6. واجهة البداية الفخمة (Hero Section)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 130px 24px 130px;
+  overflow: hidden;
+}
+
+.hero-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: heroZoom 16s ease-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* تدرج هادئ ووقور يبدأ بالفحمي وينتهي بلمسة أحمر الهلال الداكنة */
+  background: linear-gradient(145deg, rgba(17, 19, 24, 0.94) 0%, rgba(26, 29, 36, 0.88) 60%, rgba(160, 10, 22, 0.78) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.hero-pill-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rc-red);
+  box-shadow: 0 0 10px var(--rc-red);
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.3;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.hero-title .highlight {
+  color: #FFFFFF;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(180deg, transparent 70%, rgba(217, 0, 18, 0.45) 70%);
+}
+
+.hero-description {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.8;
+  color: #E2E8F0;
+  max-width: 680px;
+  margin: 0 auto 36px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* الأزرار العامة */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 28px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.btn-primary {
+  background: var(--rc-red);
+  color: #FFFFFF;
+  border: 1px solid var(--rc-red);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:hover {
+  background: var(--rc-red-hover);
+  border-color: var(--rc-red-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(217, 0, 18, 0.38);
+}
+
+.btn-outline-white {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline-white:hover {
+  background: #FFFFFF;
+  color: var(--text-main);
+  border-color: #FFFFFF;
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-light);
+}
+
+.btn-outline:hover {
+  border-color: var(--rc-red);
+  color: var(--rc-red);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   7. بطاقة الأرقام العائمة المتطورة (Key Stats Floating Bar)
+   -------------------------------------------------------------------------- */
+.stats-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-top: -64px;
+  margin-bottom: 32px;
+}
+
+.stats-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: var(--border-light);
+}
+
+.stat-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-md);
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.stat-item:hover .stat-icon-box {
+  background: var(--rc-red);
+  color: #FFFFFF;
+  transform: scale(1.1) rotate(-6deg);
+}
+
+.stat-number {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  color: var(--rc-red);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  max-width: 200px;
+}
+
+/* --------------------------------------------------------------------------
+   8. قسم "من نحن" التحريري (About Section)
+   -------------------------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px;
+  align-items: center;
+}
+
+.about-text h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.about-text h2::after {
+  content: "";
+  display: block;
+  width: min(260px, 85vw);
+  height: 28px;
+  margin-top: 16px;
+  background: var(--h-chevron) no-repeat right / contain;
+  opacity: 0.98;
+}
+
+[dir="ltr"] .about-text h2::after {
+  background-position: left;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.about-chips {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.chip:hover {
+  background: var(--bg-card);
+  border-color: var(--rc-red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.chip-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--rc-red);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-img-frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.about-img-frame img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.about-img-frame:hover img {
+  transform: scale(1.04);
+}
+
+.about-seal {
+  margin-top: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 14px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-seal img {
+  height: 56px;
+  width: auto;
+}
+
+.about-seal-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-seal-title {
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.about-seal-sub {
+  font-size: 0.8rem;
+  color: var(--rc-red);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   9. الرسالة والرؤية (Mission & Vision)
+   -------------------------------------------------------------------------- */
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.mv-card {
+  background: var(--dark-section-card);
+  border: 1px solid var(--dark-section-border);
+  border-radius: var(--radius-xl);
+  padding: 40px 36px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s var(--ease-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.mv-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.mv-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.mv-card.mission .mv-icon {
+  background: var(--rc-red);
+}
+
+.mv-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+
+.mv-card p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #E2E8F0;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   10. المبادئ السبعة الأساسية (The 7 Principles — Balanced Grid Refactored)
+   -------------------------------------------------------------------------- */
+.principles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* المبدأ الأول الرائد الشرفي (Featured Hero Principle Card) */
+.principle-hero-card {
+  background: linear-gradient(135deg, var(--bg-card), var(--rc-red-subtle));
+  border: 1.5px solid var(--border-card);
+  border-inline-start: 6px solid var(--rc-red);
+  border-radius: var(--radius-xl);
+  padding: 36px 40px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.principle-hero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.principle-hero-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-lg);
+  background: var(--rc-red);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-glow);
+}
+
+.principle-hero-text h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.principle-hero-text p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* شبكة المبادئ الستة الباقية (3 × 2 المتوازنة بنسبة 100%) */
+.principles-grid-six {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.principle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 30px 26px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.principle-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--rc-red);
+  transform: scaleX(0);
+  transition: transform 0.3s var(--ease-smooth);
+}
+
+.principle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rc-red);
+}
+
+.principle-card:hover::after {
+  transform: scaleX(1);
+}
+
+.principle-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.principle-card:hover .principle-icon {
+  background: var(--rc-red);
+  color: #FFFFFF;
+  transform: scale(1.08) rotate(-6deg);
+}
+
+.principle-card h3 {
+  font-size: 1.22rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.principle-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   11. مجالات العمل (Areas of Work)
+   -------------------------------------------------------------------------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.work-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 34px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rc-red);
+}
+
+.work-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.work-card:hover .work-icon {
+  background: var(--rc-red);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+.work-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.work-card p {
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. مقدراتنا اللوجستية (Our Assets & Logistics)
+   -------------------------------------------------------------------------- */
+.assets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+/* مركز الهلال الطبي يمتد على كامل العرض (3 أعمدة) لضمان اتزان الشبكة 1 + 3 + 3 = 7 بطاقات بدون أي فراغات */
+.asset-card.featured-asset {
+  grid-column: 1 / -1;
+}
+
+.asset-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.asset-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rc-red);
+}
+
+.asset-img-wrap {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.asset-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.asset-card:hover .asset-img-wrap img {
+  transform: scale(1.05);
+}
+
+.asset-body {
+  padding: 22px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--bg-card);
+}
+
+.asset-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  border: 1px solid rgba(217, 0, 18, 0.15);
+}
+
+.asset-title {
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.asset-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* البطاقة القيادية لمركز الهلال الطبي على الشاشات الكبيرة: توزيع أفقي أنيق */
+@media (min-width: 900px) {
+  .asset-card.featured-asset {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    align-items: stretch;
+  }
+  .asset-card.featured-asset .asset-img-wrap {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 290px;
+  }
+  .asset-card.featured-asset .asset-body {
+    padding: 34px 30px;
+    justify-content: center;
+  }
+  .asset-card.featured-asset .asset-title {
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+  }
+  .asset-card.featured-asset .asset-desc {
+    font-size: 1rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. أبرز التدخلات والأنشطة السنوية (Interventions & Annual Activities)
+   -------------------------------------------------------------------------- */
+/* شريط فلترة التدخلات الإنسانية (Interactive Filter Tabs) */
+.interventions-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+}
+
+.filter-btn {
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.filter-btn:hover {
+  border-color: var(--rc-red);
+  color: var(--rc-red);
+}
+
+.filter-btn.active {
+  background: var(--rc-red);
+  color: #FFFFFF;
+  border-color: var(--rc-red);
+  box-shadow: var(--shadow-glow);
+}
+
+.interventions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.intervention-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s var(--ease-smooth);
+  cursor: pointer;
+}
+
+.intervention-card.hidden {
+  display: none;
+}
+
+.intervention-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rc-red);
+}
+
+.intervention-img-wrap {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.intervention-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.intervention-card:hover .intervention-img-wrap img {
+  transform: scale(1.06);
+}
+
+.intervention-tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 10px;
+  border: 1px solid rgba(217, 0, 18, 0.15);
+}
+
+.intervention-body {
+  padding: 22px 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.intervention-body h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.intervention-body p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   14. شركاؤنا في العمل الإنساني (Partners Section)
+   -------------------------------------------------------------------------- */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+}
+
+.partner-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.partner-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rc-red);
+}
+
+.partner-logo-box {
+  height: 94px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF; /* أرضية بيضاء لحفظ شفافية ونقاء الشعارات */
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-light);
+}
+
+.partner-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(0.85);
+  opacity: 0.85;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.partner-card:hover .partner-logo-box img {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* حل الشركاء الذين ليس لديهم شعار بصياغة بطاقة مؤسسية أنيقة */
+.partner-card.no-logo-partner .partner-logo-box {
+  background: var(--bg-surface);
+  flex-direction: column;
+  gap: 6px;
+  color: var(--rc-red);
+}
+
+.partner-card.no-logo-partner .seal-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--rc-red);
+}
+
+.partner-card.no-logo-partner .seal-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.partner-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   15. تواصل معنا (Contact Section)
+   -------------------------------------------------------------------------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-card-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s var(--ease-smooth);
+  text-decoration: none;
+}
+
+.contact-card-item:hover {
+  border-color: var(--rc-red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--rc-red-subtle);
+  color: var(--rc-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.contact-card-item:hover .contact-icon-box {
+  background: var(--rc-red);
+  color: #FFFFFF;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-detail-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.contact-detail-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  direction: ltr;
+  text-align: start;
+}
+
+[dir="rtl"] .contact-detail-value.is-address {
+  direction: rtl;
+}
+
+.contact-action-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 38px 32px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-action-panel h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.contact-action-panel p {
+  margin-bottom: 28px;
+}
+
+.contact-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   16. التذييل الراقي (Modern Footer)
+   -------------------------------------------------------------------------- */
+.footer {
+  background: var(--dark-section-bg);
+  color: #FFFFFF;
+  padding: 80px 0 32px;
+  border-top: 1px solid var(--dark-section-border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.2fr;
+  gap: 48px;
+  margin-bottom: 56px;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-brand .footer-logo {
+  height: 68px;
+  width: auto;
+  margin: 0 auto 18px;
+  background: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  display: inline-block;
+}
+
+.footer-brand p {
+  color: #94A3B8;
+  font-size: 0.96rem;
+  line-height: 1.8;
+  max-width: 380px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-col h4 {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-col h4::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--rc-red);
+  margin-top: 8px;
+  margin-inline: auto;
+  border-radius: var(--radius-full);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.footer-link {
+  text-align: center;
+}
+
+.footer-link a {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  transition: all 0.2s var(--ease-smooth);
+  display: inline-block;
+}
+
+.footer-link a:hover {
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.footer-contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  color: #94A3B8;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.footer-copyright {
+  border-top: 1px solid var(--dark-section-border);
+  padding-top: 32px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748B;
+}
+
+/* --------------------------------------------------------------------------
+   17. معرض الصور المنبثق الاحترافي (Enhanced Lightbox Modal)
+   -------------------------------------------------------------------------- */
+.lightbox-dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-dialog[open] {
+  display: flex;
+  animation: modalFadeIn 0.25s var(--ease-smooth);
+}
+
+.lightbox-dialog::backdrop {
+  background: var(--bg-dialog-overlay);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  max-width: 1100px;
+  max-height: 90vh;
+}
+
+.lightbox-header {
+  position: absolute;
+  top: -50px;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFFFFF;
+  z-index: 10;
+}
+
+.lightbox-counter {
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+}
+
+.lightbox-close-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  font-size: 1.5rem;
+}
+
+.lightbox-close-btn:hover {
+  background: var(--rc-red);
+}
+
+.lightbox-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.lightbox-nav-btn:hover {
+  background: var(--rc-red);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav-btn.prev {
+  inset-inline-start: -24px;
+}
+
+.lightbox-nav-btn.next {
+  inset-inline-end: -24px;
+}
+
+.lightbox-img-box {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+.lightbox-img-box img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption-bar {
+  background: rgba(20, 22, 28, 0.95);
+  color: #FFFFFF;
+  padding: 14px 20px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   18. زر الصعود للأعلى (Back To Top Button)
+   -------------------------------------------------------------------------- */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  inset-inline-end: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--rc-red);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow);
+  z-index: 800;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--rc-red-hover);
+  transform: translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   19. أنيميشن الظهور التدريجي (Scroll Reveal Animations)
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+  transition-delay: calc(var(--delay, 0) * 80ms);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   20. التجاوب مع جميع أحجام الشاشات (Responsive Breakpoints)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .work-grid,
+  .principles-grid-six,
+  .assets-grid,
+  .interventions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .asset-card.featured-asset {
+    grid-column: span 2;
+  }
+
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 880px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 74px;
+    inset-inline: 0;
+    flex-direction: column;
+    background: var(--bg-card);
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    gap: 8px;
+  }
+
+  .navbar.menu-open .nav-links {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .nav-toggle-btn {
+    display: flex;
+  }
+
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-card {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 24px;
+  }
+
+  .stat-item:nth-child(2)::after {
+    display: none;
+  }
+
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .principle-hero-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 24px;
+  }
+
+  .activities-checklist {
+    grid-template-columns: 1fr;
+  }
+
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .lightbox-nav-btn.prev {
+    inset-inline-start: 8px;
+  }
+
+  .lightbox-nav-btn.next {
+    inset-inline-end: 8px;
+  }
+}
+
+@media (max-width: 580px) {
+  /* تحسين الناف بار في الجوال: العنوان في صف واحد وزر اللغة مصغر برمز */
+  .nav-container {
+    height: 62px;
+    padding: 0 12px;
+  }
+
+  .nav-brand {
+    gap: 8px;
+  }
+
+  .nav-logo-img {
+    height: 38px;
+  }
+
+  .nav-brand-text {
+    flex-direction: row !important;
+    align-items: baseline;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .nav-brand-title {
+    font-size: 0.88rem;
+  }
+
+  .nav-brand-subtitle {
+    font-size: 0.76rem;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .btn-lang {
+    height: 36px;
+    padding: 0 10px;
+    min-width: 36px;
+    gap: 0;
+  }
+
+  .btn-lang .globe-icon {
+    display: none;
+  }
+
+  .btn-lang .lang-desktop {
+    display: none;
+  }
+
+  .btn-lang .lang-mobile {
+    display: inline;
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  .nav-toggle-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* بطاقات الأرقام: صفين في كل صف 2 */
+  .stats-card {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px 12px;
+    padding: 22px 14px;
+  }
+
+  .stat-item::after {
+    display: none !important;
+  }
+
+  .stat-number {
+    font-size: 1.85rem;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+  }
+
+  .stat-icon-box {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 8px;
+  }
+
+  .stat-icon-box svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* بطاقات قسم من نحن: صفين بدل أربعة (2 في كل صف) */
+  .about-chips {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+  }
+
+  .chip {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    gap: 6px;
+  }
+
+  .chip-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .work-grid,
+  .principles-grid-six,
+  .assets-grid,
+  .interventions-grid,
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .asset-card.featured-asset {
+    grid-column: span 1;
+  }
+
+  .asset-card.featured-asset .asset-img-wrap {
+    aspect-ratio: 16/10;
+  }
+
+  .hero-section {
+    padding: 110px 16px 90px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+}
+
+/* احترام تفضيل المستخدم لتقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
